@@ -32,8 +32,9 @@ class HatLoads:
     hatvenom = HatVenom()
     payloads = Payloads().payloads
 
-    def get_payload(self, platform, arch, options={}):
+    def get_payload(self, platform, arch, payload, options={}):
         if platform in self.payloads:
             if arch in self.payloads[platform]:
-                return self.payloads[platform][arch](options)
+                if payload in self.payloads[platform][arch]:
+                return self.payloads[platform][arch][payload].generate(options)
         return None
