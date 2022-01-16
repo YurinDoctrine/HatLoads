@@ -30,6 +30,6 @@ from .shell_bind_tcp import ShellBindTCP
 
 class X64:
     payloads = {
-        'shell_reverse_tcp': ShellReverseTCP,
-        'shell_bind_tcp': ShellBindTCP
+        'shell_reverse_tcp': ShellReverseTCP(),
+        'shell_bind_tcp': ShellBindTCP()
     }
