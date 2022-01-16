@@ -12,6 +12,6 @@
     </a>
 </p>
 
-HatSploit generic payload collection, so there will be no need to write new ones.
+HatSploit collection of generic payloads designed to provide a wide range of attacks without having to spend time writing new ones.
 
-******coming soon!******
+*Coming soon!*
