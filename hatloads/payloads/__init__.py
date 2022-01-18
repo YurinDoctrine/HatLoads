@@ -26,12 +26,10 @@
 
 from .linux import Linux
 from .macos import MacOS
-from .windows import Windows
 
 
 class Payloads:
     payloads = {
         'linux': Linux().payloads,
-        'macos': MacOS().payloads,
-        'windows': Windows().payloads
+        'macos': MacOS().payloads
     }
