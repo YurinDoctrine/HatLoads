@@ -24,18 +24,10 @@
 # SOFTWARE.
 #
 
-from .x64 import X64
-from .x86 import X86
-from .mipsle import Mipsle
-from .mipsbe import Mipsbe
-from .armle import Armle
+from .aarch64 import AArch64
 
 
 class Linux:
     payloads = {
-        'x64': X64().payloads,
-        'x86': X86().payloads,
-        'mipsle': Mipsle().payloads,
-        'mipsbe': Mipsbe().payloads,
-        'armle': Armle().payloads
+        'aarch64': AArch64().payloads
     }
