@@ -24,10 +24,12 @@
 # SOFTWARE.
 #
 
+from .x64 import X64
 from .aarch64 import AArch64
 
 
 class Linux:
     payloads = {
+        'x64': X64,
         'aarch64': AArch64().payloads
     }
