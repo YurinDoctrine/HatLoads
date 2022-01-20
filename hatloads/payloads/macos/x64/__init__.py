@@ -24,12 +24,12 @@
 # SOFTWARE.
 #
 
-from .shell_reverse_tcp import ShellReverseTCP
 from .shell_bind_tcp import ShellBindTCP
+from .shell_reverse_tcp import ShellReverseTCP
 
 
 class X64:
     payloads = {
-        'shell_reverse_tcp': ShellReverseTCP(),
-        'shell_bind_tcp': ShellBindTCP()
+        'shell_bind_tcp': ShellBindTCP(),
+        'shell_reverse_tcp': ShellReverseTCP()
     }
