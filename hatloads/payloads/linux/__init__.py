@@ -30,6 +30,6 @@ from .aarch64 import AArch64
 
 class Linux:
     payloads = {
-        'x64': X64,
+        'x64': X64().payloads,
         'aarch64': AArch64().payloads
     }
