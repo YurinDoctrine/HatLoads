@@ -90,4 +90,4 @@ class ShellReverseTCP(HatVenom):
 
         if assemble:
             return self.assemble('x64', shellcode)
-        return shellcode
+        return shellcode.replace(' ' * 8, "")
