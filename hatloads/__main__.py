@@ -36,5 +36,5 @@ class HatLoads:
         if platform in self.payloads:
             if arch in self.payloads[platform]:
                 if payload in self.payloads[platform][arch]:
-                return self.payloads[platform][arch][payload].generate(assemble, options)
+                    return self.payloads[platform][arch][payload].generate(assemble, options)
         return None
