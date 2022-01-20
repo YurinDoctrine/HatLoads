@@ -95,6 +95,6 @@ class ShellReverseTCP(HatVenom):
             syscall
         """
 
-	if assemble:
+        if assemble:
             return self.assemble('x64', shellcode)
         return shellcode
