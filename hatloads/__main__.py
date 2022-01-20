@@ -40,4 +40,5 @@ class HatLoads:
 
                     if not isinstance(shellcode, bytes):
                         return shellcode.replace(' ' * 8, "").strip()
+                    return shellcode
         return None
