@@ -27,7 +27,7 @@
 from hatvenom import HatVenom
 
 
-class ShellReverseTCP(HatVenom):
+class ShellBindTCP(HatVenom):
     def generate(self, assemble=True, options={}):
         if 'BPORT' not in options:
             return b''
