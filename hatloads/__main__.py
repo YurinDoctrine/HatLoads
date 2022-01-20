@@ -36,5 +36,8 @@ class HatLoads:
         if platform in self.payloads:
             if arch in self.payloads[platform]:
                 if payload in self.payloads[platform][arch]:
-                    return self.payloads[platform][arch][payload].generate(assemble, options)
+                    shellcode = self.payloads[platform][arch][payload].generate(assemble, options)
+
+                    if not isinstance(shellcode, bytes):
+                        return shellcode.replace(' ' * 8, "").strip()
         return None
