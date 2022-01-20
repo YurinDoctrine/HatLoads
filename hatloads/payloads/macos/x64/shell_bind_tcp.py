@@ -97,4 +97,4 @@ class ShellBindTCP(HatVenom):
 
         if assemble:
             return self.assemble('x64', shellcode)
-        return shellcode.replace(' ' * 8, "").strip()
+        return shellcode
