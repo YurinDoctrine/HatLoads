@@ -12,7 +12,7 @@
     </a>
 </p>
 
-HatSploit collection of generic payloads designed to provide a wide range of attacks without having to spend time writing new ones.
+HatLoads is a HatSploit collection of generic payloads designed to provide a wide range of attacks without having to spend time writing new ones.
 
 ## Features
 
