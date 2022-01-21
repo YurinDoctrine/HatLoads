@@ -28,7 +28,7 @@ from setuptools import setup, find_packages
 
 setup(name='hatloads',
       version='1.0.0',
-      description='HatSploit collection of generic payloads designed to provide a wide range of attacks without having to spend time writing new ones.',
+      description='HatLoads is a HatSploit collection of generic payloads designed to provide a wide range of attacks without having to spend time writing new ones.',
       url='http://github.com/EntySec/HatLoads',
       author='EntySec',
       author_email='entysec@gmail.com',
