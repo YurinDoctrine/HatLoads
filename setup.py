@@ -37,7 +37,7 @@ setup(name='hatloads',
       packages=find_packages(),
       include_package_data=True,
       install_requires=[
-          'hatvenom @ git+http://github.com/EntySec/HatVenom'
+          'hatasm @ git+http://github.com/EntySec/HatAsm'
       ],
       zip_safe=False
 )
