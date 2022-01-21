@@ -24,10 +24,10 @@
 # SOFTWARE.
 #
 
-from hatvenom import HatVenom
+from hatasm import HatAsm
 
 
-class ShellReverseTCP(HatVenom):
+class ShellReverseTCP(HatAsm):
     def generate(self, assemble=True, options={}):
         if 'RHOST' not in options and 'RPORT' not in options:
             return b''
