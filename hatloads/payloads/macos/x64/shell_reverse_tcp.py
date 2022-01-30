@@ -25,6 +25,7 @@
 #
 
 from hatasm import HatAsm
+from hatvenom import HatVenom
 
 from hatloads.consts import Consts
 
