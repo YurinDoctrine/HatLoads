@@ -25,11 +25,12 @@
 #
 
 from hatasm import HatAsm
+from hatvenom import HatVenom
 
 from hatloads.consts import Consts
 
 
-class ShellBindTCP(HatAsm, Consts):
+class ShellBindTCP(HatAsm, HatVenom, Consts):
     def generate(self, assemble=True, options={}):
         if 'BPORT' not in options:
             return b''
