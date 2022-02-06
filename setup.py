@@ -29,7 +29,7 @@ from setuptools import setup, find_packages
 setup(name='hatloads',
       version='1.0.0',
       description='HatLoads is a HatSploit collection of generic payloads designed to provide a wide range of attacks without having to spend time writing new ones.',
-      url='http://github.com/EntySec/HatLoads',
+      url='https://github.com/EntySec/HatLoads',
       author='EntySec',
       author_email='entysec@gmail.com',
       license='MIT',
@@ -37,8 +37,8 @@ setup(name='hatloads',
       packages=find_packages(),
       include_package_data=True,
       install_requires=[
-          'hatasm @ git+http://github.com/EntySec/HatAsm',
-          'hatvenom @ git+http://github.com/EntySec/HatVenom'
+          'hatasm @ git+https://github.com/EntySec/HatAsm',
+          'hatvenom @ git+https://github.com/EntySec/HatVenom'
       ],
       zip_safe=False
 )
