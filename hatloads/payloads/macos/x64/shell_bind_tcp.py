@@ -35,11 +35,12 @@ class ShellBindTCP(HatAsm, HatVenom, Words):
         if 'BPORT' not in options:
             return b''
 
-        shell = self.shell['sh']
         if 'SHELL' in options:
             shell = options['SHELL']
-        shell = shell[::-1]
+        else:
+            shell = self.shell['sh']
 
+        shell = shell[::-1]
         bport = self.convert_port(options['BPORT'])
 
         shellcode = f"""
