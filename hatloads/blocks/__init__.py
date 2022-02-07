@@ -24,7 +24,7 @@
 # SOFTWARE.
 #
 
-from windows import Windows
+from .windows import Windows
 
 
 class Blocks:
