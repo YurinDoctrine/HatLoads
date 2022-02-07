@@ -25,5 +25,10 @@
 #
 
 
-class Consts:
-    shell = b'\x68\x73\x2f\x6e\x69\x62\x2f'
+class Words:
+    shell = {
+        'sh': b'/bin/sh',
+        'bash': b'/bin/bash',
+        'ash': b'/bin/ash',
+        'ksh': b'/bin/ksh'
+    }
