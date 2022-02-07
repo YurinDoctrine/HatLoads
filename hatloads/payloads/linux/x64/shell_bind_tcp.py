@@ -38,7 +38,7 @@ class ShellBindTCP(HatAsm, HatVenom, Consts):
         if 'SHELL' in options:
             shell = options['SHELL']
         else:
-            shell = self.shell
+            shell = self.shells['bash']
 
         bport = self.convert_port(options['BPORT'])
 
