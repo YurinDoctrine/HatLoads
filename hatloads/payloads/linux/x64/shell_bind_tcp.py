@@ -40,6 +40,7 @@ class ShellBindTCP(HatAsm, HatVenom, Words):
         else:
             shell = self.shell['sh']
 
+        shell = shell[::-1]
         bport = self.convert_port(options['BPORT'])
 
         shellcode = f"""
