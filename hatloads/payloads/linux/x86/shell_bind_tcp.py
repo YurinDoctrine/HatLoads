@@ -48,5 +48,5 @@ class ShellBindTCP(HatAsm, HatVenom, Words):
         """
 
         if assemble:
-            return self.assemble('x64', shellcode)
+            return self.assemble('x86', shellcode)
         return shellcode
