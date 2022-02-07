@@ -37,6 +37,7 @@ class Payloads:
     def generate_payload(self, platform, arch, payload, options, assemble):
         if platform in self.payloads:
             if arch in self.payloads[platform]:
-                return self.payloads[platform][arch](payload, options).generate(assemble)
+                if payload in self.payloads[platform][arch]:
+                    return self.payloads[platform][arch][payload].generate(options, assemble)
 
         return b'' if assemble else ''
