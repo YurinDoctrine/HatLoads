@@ -26,21 +26,9 @@
 
 
 class Words:
-    '''
-    NOTE:
-        Store all words in reversed byte order, for instance:
-            b'/bin/sh' should be b'hs/nib/'
-
-        To reverse word, put [::-1] after expression, like this:
-            b'/bin/sh'[::-1]
-
-        This way HatAsm automatically reverse it for specified
-        byte order (little endian or big endian).
-    '''
-
     shell = {
-        'sh': b'/bin/sh'[::-1],
-        'bash': b'/bin/bash'[::-1],
-        'ash': b'/bin/ash'[::-1],
-        'ksh': b'/bin/ksh'[::-1]
+        'sh': b'/bin/sh',
+        'bash': b'/bin/bash',
+        'ash': b'/bin/ash',
+        'ksh': b'/bin/ksh'
     }
