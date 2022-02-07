@@ -29,7 +29,7 @@ from .payloads import Payloads
 
 class HatLoads(Payloads):
     def get_payload(self, platform, arch, payload, options={}, assemble=True):
-        shellcode = self.generate_payload(
+        shellcode = self.generate(
             platform,
             arch,
             payload,
