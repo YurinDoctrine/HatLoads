@@ -33,3 +33,10 @@ class Payloads:
         'linux': Linux().payloads,
         'macos': MacOS().payloads
     }
+
+    def generate_payload(self, platform, arch, payload, options, assemble):
+        if platform in self.payloads:
+            if arch in self.payloads[platform]:
+                return self.payloads[platform][arch](payload, options).generate(assemble)
+
+        return b'' if assemble else ''
