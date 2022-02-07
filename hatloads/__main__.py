@@ -27,16 +27,16 @@
 from .payloads import Payloads
 
 
-class HatLoads:
-    payloads = Payloads().payloads
-
+class HatLoads(Payloads):
     def get_payload(self, platform, arch, payload, options={}, assemble=True):
-        if platform in self.payloads:
-            if arch in self.payloads[platform]:
-                if payload in self.payloads[platform][arch]:
-                    shellcode = self.payloads[platform][arch][payload].generate(assemble, options)
+        shellcode = self.generate_payload(
+            platform,
+            arch,
+            payload,
+            options,
+            assemble
+        )
 
-                    if not isinstance(shellcode, bytes):
-                        return shellcode.replace(' ' * 8, "").strip()
-                    return shellcode
-        return b'' if assemble else ''
+        if not assemble:
+            return shellcode.replace(' ' * 8, "").strip()
+        return shellcode
