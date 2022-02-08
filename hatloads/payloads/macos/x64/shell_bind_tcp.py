@@ -94,7 +94,7 @@ class ShellBindTCP(HatAsm, HatVenom, Words):
 
             xor rsi, rsi
             push rsi
-            mov rdi, 0x{(shell+'/').hex()}
+            mov rdi, 0x{(shell+b'/').hex()}
             push rdi
             mov rdi, rsp
             xor rdx, rdx
