@@ -26,6 +26,10 @@
 
 from .x64 import X64
 from .x86 import X86
+
+from .mipsbe import Mipsbe
+from .mipsle import Mipsle
+
 from .aarch64 import AArch64
 
 
@@ -33,5 +37,7 @@ class Linux:
     payloads = {
         'x64': X64().payloads,
         'x86': X86().payloads,
+        'mipsbe': Mipsbe().payloads,
+        'mipsle': Mipsle().payloads,
         'aarch64': AArch64().payloads
     }
