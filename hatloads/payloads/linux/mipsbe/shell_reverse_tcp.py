@@ -100,5 +100,6 @@ class ShellReverseTCP(HatAsm, HatVenom, Words):
         """
 
         if assemble:
-            return self.assemble('mipsbe', shellcode)
+            bytecode = self.assemble('mipsbe', shellcode)
+            return bytecode.replace(b'\x00'*4, b'') # patch null bytes
         return shellcode
