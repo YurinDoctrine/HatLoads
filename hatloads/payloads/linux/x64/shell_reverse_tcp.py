@@ -36,9 +36,9 @@ class ShellReverseTCP(HatAsm, HatVenom, Words):
             return b''
 
         if 'SHELL' in options:
-            shell = options['SHELL']
+            shell = options['SHELL'].encode()
         else:
-            shell = self.shell['sh']
+            shell = self.shell['sh'].encode()
 
         shell = shell[::-1]
         rhost = self.convert_host(options['RHOST'])
