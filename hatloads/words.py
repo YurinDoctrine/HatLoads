@@ -27,8 +27,8 @@
 
 class Words:
     shell = {
-        'sh': b'/bin/sh',
-        'bash': b'/bin/bash',
-        'ash': b'/bin/ash',
-        'ksh': b'/bin/ksh'
+        'sh': '/bin/sh',
+        'bash': '/bin/bash',
+        'ash': '/bin/ash',
+        'ksh': '/bin/ksh'
     }
