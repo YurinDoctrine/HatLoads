@@ -36,9 +36,9 @@ class ShellBindTCP(HatAsm, HatVenom, Words):
             return b''
 
         if 'SHELL' in options:
-            shell = options['SHELL']
+            shell = options['SHELL'].encode()
         else:
-            shell = self.shell['sh']
+            shell = self.shell['sh'].encode()
 
         shell = [shell[::-1][i:i+4] for i in range(0, len(shell), 4)]
         shell_asm = ""
