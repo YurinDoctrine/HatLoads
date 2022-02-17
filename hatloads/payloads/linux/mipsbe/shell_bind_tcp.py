@@ -41,7 +41,7 @@ class ShellBindTCP(HatAsm, HatVenom, Words):
             shell = self.shell['sh'].encode()
 
         shell = shell[::-1]
-        bport = self.convert_port(options['BPORT'])
+        bport = self.convert_port(options['BPORT'], 'big')
 
         shellcode = f"""
         start:
